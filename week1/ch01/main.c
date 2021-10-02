@@ -1,4 +1,4 @@
-> C语言指针实现链表
+>C语言指针实现链表
 
 #include <stdio.h>
 #include <malloc.h>
