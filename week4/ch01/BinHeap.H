@@ -3,10 +3,6 @@
 struct HeapStruct;
 typedef struct HeapStruct *PriorityQueue;
 
-typedef int ElementType;
-int MinPQSize = 20;
-int MinDate = 13;
-
 PriorityQueue Initialize( int MaxElements );
 void Destroy( PriorityQueue H );
 void MakeEmpty( PriorityQueue H);
