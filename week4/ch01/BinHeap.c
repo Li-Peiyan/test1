@@ -1,6 +1,12 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+
+typedef int ElementType;
+int MinPQSize = 20;
+int MinDate = 13;
+
+
 struct HeapStruct
 {
 	int Capacity;
