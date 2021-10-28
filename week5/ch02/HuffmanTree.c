@@ -20,6 +20,27 @@ void ReadWord()
 		tree[i].parent = tree[i].lchild = tree[i].rchild = -1;
 	}
 }
+struct Huffman
+{
+	char word;				//存储字母
+	float weight;			//存储字母所占的权值
+	int parent;				//存储该节点父亲节点的位置
+	int lchild;				//存储左孩子节点所在位置
+	int rchild;				//存储右孩子节点所在位置
+	char M[15];
+};
+
+void ReadWord()
+{
+	tree = (Position) malloc ( 53 * sizeof( struct Huffman ));
+	for(int i = 0; i<27; i++)
+	{
+		tree[i].word = Word[ i ];
+		tree[i].weight = Weight[ i ];
+		tree[i].parent = tree[i].lchild = tree[i].rchild = -1;
+		tree[i].M[0] = '\0';
+	}
+}
 
 void CreatTree()
 {
@@ -35,6 +56,7 @@ void CreatTree()
 		tree[rear].word='$';			//未存储字母的定义为'$'字符
 		tree[rear].lchild=s1;
 		tree[rear].rchild=s2;
+		tree[rear].M[0] = '\0';
 	}
 }
 
@@ -62,13 +84,36 @@ void Select()
 	}
 }
 
+void CreatCode()
+{
+	for(int i=0;i<27;i++)
+	{
+		char b[15];		//定义临时数组b[15]，y用于读取字母
+		int x=0,m,n=i;
+		while(n!=rear)					//当读取到树的根节点时循环结束
+		{	
+			m=tree[n].parent;
+			if(n==tree[m].lchild) b[x]='0';		//逆向读取，为左孩子读入'0',右孩子读入'1'
+			else b[x]='1';
+			x++;
+			n=m;
+		}
+		for(int i1=0; i1<x; i1++)
+		{
+			tree[i].M[i1] = b[x-1-i1];
+		}
+		tree[i].M[x]='\0';
+	}
+
+}
+
 void PrintCode()
 {
-	printf("index word weight parent lchild rchild\n");
+	printf("index word  weight  parent lchild rchild code\n");
 	int i;
 	for(i=0;i<=rear;i++)
 	{
-		printf("%d    %c    %f   %d     %d     %d\n",i ,tree[i].word ,tree[i].weight  ,tree[i].parent  ,tree[i].lchild  ,tree[i].rchild );
+		printf("%d    %c     %f    %d    %d    %d     %s\n",i ,tree[i].word  ,tree[i].weight  ,tree[i].parent  ,tree[i].lchild  ,tree[i].rchild ,tree[i].M);
 	}
 }
 
@@ -77,6 +122,7 @@ int main()
 {
 	ReadWord();
 	CreatTree();
+	CreatCode();
 	PrintCode();
 
 	return 0;
