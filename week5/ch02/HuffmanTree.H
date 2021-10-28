@@ -24,5 +24,6 @@ void ReadWord();
 void CreatTree();		//构建哈夫曼树
 void Select();			//比较得出较小的两个节点
 void PrintCode();
+void CreatCode();
 
 #endif
